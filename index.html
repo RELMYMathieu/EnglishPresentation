@@ -1,483 +1,817 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ship Cove, Queen Charlotte Sound</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-<style>
-  :root { --r-background-color: #0a0a0a; }
-  .reveal, .reveal h1, .reveal h2, .reveal h3, .reveal p, .reveal li {
-    font-family: 'Quicksand', sans-serif;
-  }
-  .reveal .slides section {
-    display: flex !important; align-items: center !important;
-    justify-content: center !important; height: 100% !important; padding: 0 !important;
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Ship Cove, Queen Charlotte Sound</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/theme/black.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070709;
+      --accent-gold: #e5c07b;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8f9fa;
+      --text-muted: #a0aab5;
+    }
 
-  /* ── Title BG ── */
-  #titleBg {
-    position: fixed; inset: 0; z-index: 0;
-    background: url('smaller_painting.jpg') center/cover no-repeat;
-    filter: blur(28px) brightness(0.3); transform: scale(1.2);
-    transition: opacity 0.6s ease;
-  }
-  #titleBg.hide { opacity: 0; pointer-events: none; }
+    body {
+      background-color: var(--bg-dark);
+    }
 
-  /* ── Slide 1: Title ── */
-  .title-wrap {
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; width: 100%;
-  }
-  .title-wrap h1 { font-size: 2.6em; font-weight: 300; margin: 0 0 0.15em; color: #f5f0e8; }
-  .title-wrap .sub { font-size: 0.7em; opacity: 0.5; margin: 0.1em 0; font-weight: 300; color: #ddd; }
+    .reveal,
+    .reveal p,
+    .reveal li,
+    .reveal div {
+      font-family: 'Outfit', sans-serif;
+    }
 
-  /* ── Slide 2: At a Glance ── */
-  .glance-slide {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-  .glance-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background: url('full_painting.jpg') center/cover no-repeat;
-    filter: blur(40px) brightness(0.2) saturate(1.4); transform: scale(1.3);
-  }
-  .glance-card {
-    position: relative; z-index: 1;
-    display: flex; gap: 36px; align-items: stretch;
-    background: rgba(0,0,0,0.55); backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px; padding: 32px;
-    max-width: 1060px; box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  }
-  .glance-card .painting-col { flex: 0 0 auto; display: flex; align-items: center; }
-  .glance-card .painting-col img {
-    height: 440px; width: auto; display: block;
-    border-radius: 4px; cursor: pointer;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .glance-card .painting-col img:hover {
-    transform: scale(1.02); box-shadow: 0 8px 36px rgba(0,0,0,0.7);
-  }
-  .glance-card .info-side {
-    flex: 1; display: flex; flex-direction: column;
-    justify-content: center; text-align: left; min-width: 0;
-  }
-  .glance-card .info-side .section-label {
-    font-size: 0.42em; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.15em; color: rgba(200,170,100,0.5); margin: 0 0 4px;
-  }
-  .glance-card .info-side .section-label:not(:first-child) { margin-top: 14px; }
-  .glance-card .info-side .desc {
-    font-size: 0.48em; line-height: 1.55; color: rgba(255,255,255,0.55);
-    margin: 0 0 2px; font-weight: 300;
-  }
-  .glance-card .meta-row {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 4px 16px; margin-top: 16px; padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  .glance-card .meta-item { font-size: 0.38em; color: rgba(255,255,255,0.3); font-weight: 300; }
-  .glance-card .meta-item span { color: rgba(255,255,255,0.5); font-weight: 500; }
+    .reveal h1,
+    .reveal h2,
+    .reveal h3 {
+      font-family: 'Playfair Display', serif;
+    }
 
-  /* ── Slide 3: Interlude ── */
-  .interlude {
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    width: 100%; height: 100%; gap: 20px;
-  }
-  .interlude h2 {
-    font-size: 2em; font-weight: 300; color: #f5f0e8; margin: 0;
-    opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
-    transform: scale(0.88); filter: blur(4px);
-  }
-  .interlude p {
-    font-size: 0.65em; color: rgba(255,255,255,0.3); margin: 0; font-weight: 300;
-    opacity: 0; transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s, filter 0.8s ease 0.2s;
-    transform: scale(0.88); filter: blur(4px);
-  }
-  .present .interlude h2, .present .interlude p {
-    opacity: 1; transform: scale(1); filter: blur(0);
-  }
-  .interlude .preview-img {
-    max-height: 480px; max-width: 90%; box-shadow: 0 8px 40px rgba(0,0,0,0.5); display: block;
-  }
-  .past .interlude h2, .past .interlude p {
-    opacity: 0; transform: scale(1.05); filter: blur(4px);
-    transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
-  }
+    .reveal .slides section {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      height: 100% !important;
+      padding: 0 !important;
+    }
 
-  /* ══════════════════════════════════════════
-     PERSISTENT PAINTING LAYER (zoom & pan)
-     ══════════════════════════════════════════ */
-  #paintingLayer {
-    position: fixed; inset: 0; z-index: 50;
-    overflow: hidden; pointer-events: none;
-    background: #0a0a0a;
-    opacity: 0; transition: opacity 0.6s ease;
-  }
-  #paintingLayer.visible { opacity: 1; }
-  #paintingLayer img {
-    width: 100%; height: 100%; object-fit: cover;
-    transform-origin: center center;
-    /* transition set dynamically by JS */
-  }
+    .glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    }
 
-  /* ── Info-box overlay ── */
-  #zoomInfoLayer {
-    position: fixed; inset: 0; z-index: 51; pointer-events: none;
-  }
-  .zoom-info {
-    position: absolute; opacity: 0;
-    transition: opacity 0.35s ease;
-    pointer-events: none;
-  }
-  .zoom-info.active { opacity: 1; pointer-events: auto; }
-  .info-box {
-    background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
-    padding: 20px 28px; border-radius: 4px;
-    border-left: 3px solid rgba(200,170,100,0.4); max-width: 380px;
-  }
-  .info-box h3 { font-size: 18px; font-weight: 600; color: #f5f0e8; margin: 0 0 6px; font-family: 'Quicksand', sans-serif; }
-  .info-box p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,0.65); margin: 0; font-weight: 300; font-family: 'Quicksand', sans-serif; }
+    /* Slide 1: Main Title */
+    #titleBg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: url('smaller_painting.webp') center/cover no-repeat;
+      filter: blur(20px) brightness(0.35);
+      /* Less blur, clearly shows it's a painting */
+      transform: scale(1.1);
+      transition: opacity 1s ease;
+    }
 
-  /* ── Conclusion ── */
-  .conclusion-wrap {
-    display: flex; align-items: center; justify-content: center;
-    width: 100%; height: 100%; gap: 60px; padding: 40px 80px; box-sizing: border-box;
-  }
-  .conclusion-left { flex: 1; text-align: left; }
-  .conclusion-left h2 {
-    font-size: 2.4em; font-weight: 300; color: #f5f0e8;
-    letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 28px;
-  }
-  .conclusion-left .sources-label {
-    font-size: 0.42em; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.15em; color: rgba(200,170,100,0.5); margin: 0 0 12px;
-  }
-  .conclusion-left .source-link {
-    display: block; font-size: 0.45em; font-weight: 300;
-    color: rgba(255,255,255,0.45); margin: 0 0 6px;
-    text-decoration: none; transition: color 0.15s;
-  }
-  .conclusion-left .source-link:hover { color: rgba(255,255,255,0.8); }
-  .conclusion-left .source-link span { color: rgba(200,170,100,0.4); margin-right: 6px; }
-  .conclusion-qr { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-  .conclusion-qr img { width: 180px; height: 180px; border-radius: 6px; background: #1a1a1a; display: block; }
-  .conclusion-qr .qr-label { font-size: 0.38em; color: rgba(255,255,255,0.3); font-weight: 300; }
+    #titleBg.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-  /* ── Thanks ── */
-  .thanks-wrap {
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    width: 100%; height: 100%; position: relative; z-index: 1;
-  }
-  .thanks-wrap h2 { font-size: 2.4em; font-weight: 300; color: #f5f0e8; margin: 0 0 0.2em; }
-  .thanks-wrap p { font-size: 0.65em; color: rgba(255,255,255,0.35); font-weight: 300; margin: 0; }
+    .title-wrap {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      width: 100%;
+      max-width: 900px;
+      padding: 40px;
+    }
 
-  /* ── Confetti ── */
-  .confetti-container {
-    position: fixed; inset: 0; overflow: hidden;
-    pointer-events: none; z-index: 9998; display: none;
-  }
-  .confetti-container.thanks-active { display: block; }
-  .confetti-piece { position: absolute; top: -20px; width: 10px; height: 10px; opacity: 0; }
-  .thanks-active .confetti-piece { animation: confettiFall linear forwards; }
-  @keyframes confettiFall {
-    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
-    80%  { opacity: 1; }
-    100% { transform: translateY(100vh) rotate(var(--rot)) scale(0.6); opacity: 0; }
-  }
-  .present .thanks-emoji { display: inline-block; animation: gentlePulse 2s ease-in-out infinite; }
-  @keyframes gentlePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+    .title-wrap h1 {
+      font-size: 1.8em;
+      /* Much smaller as requested */
+      font-weight: 400;
+      margin: 0 0 0.4em;
+      color: var(--text-main);
+      letter-spacing: 0.03em;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    }
 
-  /* ── Lightbox ── */
-  #lightbox {
-    position: fixed; inset: 0; z-index: 9999;
-    background: rgba(0,0,0,0.9);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease; cursor: zoom-out;
-  }
-  #lightbox.active { opacity: 1; pointer-events: auto; }
-  #lightbox img { max-width: 92vw; max-height: 92vh; transform: scale(0.95); transition: transform 0.3s ease; }
-  #lightbox.active img { transform: scale(1); }
-  #lightbox .lb-close {
-    position: absolute; top: 18px; right: 24px;
-    color: rgba(255,255,255,0.5); font-size: 28px; cursor: pointer; transition: color 0.15s;
-  }
-  #lightbox .lb-close:hover { color: #fff; }
-</style>
+    .title-divider {
+      width: 50px;
+      height: 1px;
+      background: var(--accent-gold);
+      margin: 0 auto 20px;
+    }
+
+    .title-wrap .sub {
+      font-size: 0.7em;
+      margin: 0.3em 0;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Slide 2: Glance Card */
+    .glance-slide {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .glance-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: url('full_painting.webp') center/cover no-repeat;
+      filter: blur(60px) brightness(0.15);
+      transform: scale(1.2);
+    }
+
+    .glance-card {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 48px;
+      align-items: center;
+      padding: 40px;
+      max-width: 1100px;
+      width: 90%;
+    }
+
+    .glance-card .painting-col {
+      flex: 0 0 45%;
+      position: relative;
+    }
+
+    .glance-card .painting-col img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      cursor: zoom-in;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glance-card .info-side {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .section-label {
+      font-size: 0.45em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-gold);
+      margin: 0 0 8px;
+    }
+
+    .section-label:not(:first-child) {
+      margin-top: 24px;
+    }
+
+    .desc {
+      font-size: 0.55em;
+      line-height: 1.6;
+      color: var(--text-main);
+      margin: 0 0 4px;
+      font-weight: 300;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-item .meta-title {
+      font-size: 0.35em;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .meta-item .meta-val {
+      font-size: 0.5em;
+      color: var(--text-main);
+      font-weight: 300;
+    }
+
+    /* Slide 3: Summary List */
+    .summary-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .summary-slide h2 {
+      font-size: 2em;
+      font-weight: 400;
+      color: var(--text-main);
+      margin: 0;
+    }
+
+    .summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 20px;
+      font-size: 0.8em;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .summary-num {
+      font-size: 1.1em;
+      font-weight: 400;
+      color: var(--accent-gold);
+      font-family: 'Playfair Display', serif;
+      opacity: 0.8;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .summary-item span:last-child {
+      color: var(--text-main);
+    }
+
+    /* Slide 4: Interlude */
+    .interlude {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .interlude h2 {
+      font-size: 1.8em;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .interlude p {
+      font-size: 0.7em;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .interlude-content {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(5px);
+      transition: all 1s ease;
+    }
+
+    .present .interlude-content {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .interlude .preview-img {
+      max-height: 55vh;
+      /* Larger preview image */
+      border-radius: 6px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 10px;
+    }
+
+    /* Zooms & Info Boxes */
+    #paintingLayer {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      overflow: hidden;
+      pointer-events: none;
+      background: var(--bg-dark);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    #paintingLayer.visible {
+      opacity: 1;
+    }
+
+    #paintingLayer img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform-origin: center center;
+    }
+
+    #zoomInfoLayer {
+      position: fixed;
+      inset: 0;
+      z-index: 51;
+      pointer-events: none;
+    }
+
+    .zoom-info {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+
+    .zoom-info.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .info-box {
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 24px 28px;
+      border-radius: 8px;
+      border: 1px solid var(--accent-gold);
+      /* Full border outline instead of top line */
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .info-box h3 {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--accent-gold);
+      margin: 0 0 10px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .info-box p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-main);
+      margin: 0;
+      font-weight: 300;
+    }
+
+    /* Slide: Culture removed */
+
+    /* Slide: Conclusion */
+    .conclusion-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1000px;
+      width: 90%;
+      gap: 60px;
+      text-align: left;
+    }
+
+    .conclusion-left {
+      flex: 1;
+    }
+
+    .conclusion-left h2 {
+      font-size: 2.2em;
+      font-weight: 400;
+      margin: 0 0 30px;
+    }
+
+    .sources-label {
+      font-size: 0.4em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent-gold);
+      margin: 0 0 16px;
+    }
+
+    .source-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.6em;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 0 16px;
+      padding: 8px 0;
+    }
+
+    .source-link span {
+      color: var(--accent-gold);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 500;
+      font-size: 1em;
+      min-width: 24px;
+    }
+
+    .conclusion-qr {
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .conclusion-qr img {
+      max-width: 180px;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .qr-label {
+      font-size: 0.4em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Slide: Thanks */
+    .thanks-wrap {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .thanks-wrap h2 {
+      font-size: 3em;
+      font-weight: 400;
+      margin: 0 0 0.3em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      white-space: nowrap;
+      /* Prevents emojis from wrapping to a new line */
+    }
+
+    .thanks-wrap p {
+      font-size: 0.8em;
+      color: var(--text-muted);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(5, 5, 7, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      cursor: zoom-out;
+    }
+
+    #lightbox.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 4px;
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    #lightbox.active img {
+      transform: scale(1);
+    }
+
+    #lightbox .lb-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: #fff;
+      font-size: 36px;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+    }
+
+    #lightbox .lb-close:hover {
+      opacity: 1;
+    }
+
+    /* Confetti */
+    .confetti-container {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 9998;
+      display: none;
+    }
+
+    .confetti-container.thanks-active {
+      display: block;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      top: -20px;
+      opacity: 0;
+    }
+
+    .thanks-active .confetti-piece {
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(100vh) rotate(var(--rot));
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="lightbox"><span class="lb-close">&times;</span><img src="" alt=""></div>
-<div id="titleBg"></div>
+  <div id="lightbox">
+    <div class="lb-close">&times;</div>
+    <img src="" alt="Fullscreen view">
+  </div>
 
-<!-- ── Persistent painting layer (lives above Reveal, driven by JS) ── -->
-<div id="paintingLayer"><img src="smaller_painting.jpg" alt=""></div>
-<div id="zoomInfoLayer"></div>
+  <div id="titleBg"></div>
+  <div id="paintingLayer"><img src="smaller_painting.webp" alt="Painting Layer"></div>
+  <div id="zoomInfoLayer"></div>
+  <div class="confetti-container" id="confettiBox"></div>
 
-<div class="confetti-container" id="confettiBox"></div>
+  <div class="reveal">
+    <div class="slides">
 
-<div class="reveal">
-<div class="slides">
-
-  <!-- 0 — Title -->
-  <section data-transition="fade">
-    <div class="title-wrap">
-      <h1>Ship Cove,<br>Queen Charlotte Sound</h1>
-      <p class="sub">John Webber · c. 1788</p>
-      <p class="sub">Oil on canvas · Te Papa Tongarewa, Wellington</p>
-    </div>
-  </section>
-
-  <!-- 1 — At a Glance -->
-  <section data-transition="fade" data-background-color="#0a0a0a">
-    <div class="glance-slide">
-      <div class="glance-bg"></div>
-      <div class="glance-card">
-        <div class="painting-col">
-          <img src="full_painting.jpg" id="museumImg" alt="Ship Cove by Webber">
+      <section data-transition="fade">
+        <div class="title-wrap">
+          <h1>Ship Cove, Queen Charlotte Sound</h1>
+          <div class="title-divider"></div>
+          <p class="sub">John Webber · c. 1788</p>
+          <p class="sub">Oil on canvas · Te Papa Tongarewa, Wellington</p>
         </div>
-        <div class="info-side">
-          <p class="section-label">The Scene</p>
-          <p class="desc">Cook's crew at Meretoto / Ship Cove — Māori trading fish — idyllic surface, hidden tensions</p>
-          <p class="section-label">The Artist</p>
-          <p class="desc">John Webber (1751–1793) — London-born, Swiss-trained — Official artist, Cook's 3rd voyage</p>
-          <div class="meta-row">
-            <div class="meta-item"><span>Medium</span> Oil on canvas</div>
-            <div class="meta-item"><span>Dimensions</span> 762 × 584 mm</div>
-            <div class="meta-item"><span>Date</span> c. 1788</div>
-            <div class="meta-item"><span>Collection</span> Te Papa Tongarewa</div>
+      </section>
+
+      <section data-transition="fade">
+        <div class="glance-slide">
+          <div class="glance-bg"></div>
+          <div class="glance-card glass-panel">
+            <div class="painting-col">
+              <!-- Lightbox on this image only -->
+              <img src="full_painting.webp" id="museumImg" alt="Ship Cove by Webber" class="lightbox-img">
+            </div>
+            <div class="info-side">
+              <p class="section-label">The Scene</p>
+              <p class="desc">Cook's crew at Meretoto / Ship Cove.</p>
+              <p class="desc">Māori trading fish — idyllic surface, hidden tensions.</p>
+
+              <p class="section-label">The Artist</p>
+              <p class="desc">John Webber (1751–1793)</p>
+              <p class="desc">London-born, Swiss-trained — Official artist, Cook's 3rd voyage.</p>
+
+              <div class="meta-grid">
+                <div class="meta-item"><span class="meta-title">Medium</span><span class="meta-val">Oil on canvas</span>
+                </div>
+                <div class="meta-item"><span class="meta-title">Dimensions</span><span class="meta-val">762 × 584
+                    mm</span></div>
+                <div class="meta-item"><span class="meta-title">Date</span><span class="meta-val">c. 1788</span></div>
+                <div class="meta-item"><span class="meta-title">Collection</span><span class="meta-val">Te Papa
+                    Tongarewa</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section data-transition="fade">
+        <div class="summary-slide">
+          <h2>Presentation Overview</h2>
+          <!-- No background panel or fancy hover effects here -->
+          <div class="summary-list">
+            <div class="summary-item"><span class="summary-num">I</span><span>Historical Context</span></div>
+            <div class="summary-item"><span class="summary-num">II</span><span>Quick Glance at the Scene</span></div>
+            <div class="summary-item"><span class="summary-num">III</span><span>Description &amp; Interpretation</span>
+            </div>
+            <div class="summary-item"><span class="summary-num">IV</span><span>Māori Culture Resurgence</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-transition="fade">
+        <div class="interlude">
+          <div class="interlude-content">
+            <!-- Smaller text -->
+            <h2>Let's take a closer look</h2>
+            <p>Exploring the details of Webber's composition</p>
+          </div>
+          <!-- Larger preview image -->
+          <img src="smaller_painting.webp" class="preview-img interlude-content" alt="Preview">
+        </div>
+      </section>
+
+      <!-- Zoom sections -->
+      <section class="zoom-section" data-transition="fade-in none-out"></section>
+      <section class="zoom-section" data-transition="none"></section>
+      <section class="zoom-section" data-transition="none"></section>
+      <section class="zoom-section" data-transition="none"></section>
+      <section class="zoom-section" data-transition="none"></section>
+      <section class="zoom-section" data-transition="none-in fade-out"></section>
+
+      <!-- Culture section -->
+      <section data-transition="fade"
+        style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+        <div
+          style="position: absolute; inset: 0; z-index: 0; background: url('smaller_painting.webp') center/cover no-repeat; filter: blur(40px) brightness(0.25); transform: scale(1.15);">
+        </div>
+        <h1 style="position: relative; z-index: 1;">How does this impact Maori Culture Resurgence ?</h1>
+      </section>
+
+      <section data-transition="fade">
+        <div class="conclusion-wrap">
+          <div class="conclusion-left">
+            <h2>Conclusion</h2>
+            <p class="sources-label">Sources & Further Reading</p>
+            <!-- Standard numbers, no hover styling -->
+            <a class="source-link" href="https://en.wikipedia.org/wiki/John_Webber" target="_blank">
+              <span>[1]</span> Wikipedia Biography (John Webber, painter)
+            </a>
+            <a class="source-link"
+              href="https://collections.tepapa.govt.nz/object/37149?page=1&rtp=1&ros=1&asr=1&assoc=all&mb=c"
+              target="_blank">
+              <span>[2]</span> Te Papa Tongarewa: Painting Source
+            </a>
+            <a class="source-link"
+              href="https://artsandculture.google.com/asset/ship-cove-queen-charlotte-sound-john-webber-artist/YwFFyUYm2equeQ"
+              target="_blank">
+              <span>[3]</span> Google Arts &amp; Culture Extended Info
+            </a>
+          </div>
+          <!-- Simple centered image layout for the QR -->
+          <div class="conclusion-qr">
+            <img src="Sources_QR.png" alt="QR code">
+            <span class="qr-label">Scan for sources</span>
+          </div>
+        </div>
+      </section>
+
+      <section data-transition="fade" id="thanksSlide">
+        <div class="thanks-wrap">
+          <!-- Flex container ensures emoji don't wrap to new line -->
+          <h2><span class="thanks-emoji">✨</span> Thank You <span class="thanks-emoji">✨</span></h2>
+          <p>Now go visit a museum or something.</p>
+        </div>
+      </section>
+
     </div>
-  </section>
+  </div>
 
-  <!-- 2 — Interlude -->
-  <section data-transition="fade" data-background-color="#0a0a0a">
-    <div class="interlude">
-      <h2>Let's take a closer look.</h2>
-      <p>Exploring the details of Webber's composition</p>
-      <img src="smaller_painting.jpg" class="preview-img">
-    </div>
-  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
+  <script>
+    var ZOOMS = [
+      { scale: 1, x: 0, y: 0 },
+      { scale: 1.25, x: -10, y: -5, info: { pos: 'bottom-left', title: 'Vegetation', text: 'Trees, shrubs, grass, bushes...' } },
+      { scale: 3, x: -30, y: -30, info: { pos: 'top-left', title: 'Soldiers with the Maori', text: 'We see soldiers next to the Maori, seemingly watching or helping them.' } },
+      { scale: 3, x: -10, y: -33, info: { pos: 'top-right', title: 'Maori Fishermen', text: 'We see Maori fishermen carrying fishes.' } },
+      { scale: 3.5, x: -3, y: -35, info: { pos: 'top-right', title: 'Soldiers disembarking', text: 'The soldiers are disembarking from the boats. They are wearing their traditional blue uniforms, distinguishing them from the Maori.' } },
+      { scale: 1.75, x: 10, y: -21, info: { pos: 'bottom-right', title: 'Two Maori soldiers', text: 'Over here, two Maori soldiers are standing in front of the whole scene, with their weapons in hand, inside of a canoe.' } }
+    ];
 
-  <!-- 3–9 — Zoom slides (empty; painting layer + info overlay do the work) -->
-  <section class="zoom-section" data-transition="fade-in none-out" data-background-color="#0a0a0a"></section>
-  <section class="zoom-section" data-transition="none"              data-background-color="#0a0a0a"></section>
-  <section class="zoom-section" data-transition="none"              data-background-color="#0a0a0a"></section>
-  <section class="zoom-section" data-transition="none"              data-background-color="#0a0a0a"></section>
-  <section class="zoom-section" data-transition="none"              data-background-color="#0a0a0a"></section>
-  <section class="zoom-section" data-transition="none-in fade-out"  data-background-color="#0a0a0a"></section>
+    // Replaced bouncy easing with a smooth, static feel
+    var ZOOM_DURATION = 1400; // Slower, more elegant timing
+    var easing = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
-  <!-- 10 — Conclusion -->
-  <section data-transition="fade" data-background-color="#0a0a0a">
-    <div class="conclusion-wrap">
-      <div class="conclusion-left">
-        <h2>Conclusion</h2>
-        <p class="sources-label">Sources</p>
-        <a class="source-link" href="https://en.wikipedia.org/wiki/John_Webber"><span>[1]</span> Wikipedia Biography (John Webber, painter)</a>
-        <a class="source-link" href="https://collections.tepapa.govt.nz/object/37149?page=1&rtp=1&ros=1&asr=1&assoc=all&mb=c"><span>[2]</span> Painting Source</a>
-        <a class="source-link" href="https://artsandculture.google.com/asset/ship-cove-queen-charlotte-sound-john-webber-artist/YwFFyUYm2equeQ"><span>[3]</span> Google Arts & Culutre, extra info</a>
-      </div>
-      <div class="conclusion-qr">
-        <img src="Sources_QR.png" alt="QR code" class="lightbox-img" style="cursor:pointer;">
-        <span class="qr-label">Scan for sources</span>
-      </div>
-    </div>
-  </section>
+    var POS_STYLES = {
+      'top-left': 'top: 60px; left: 60px;',
+      'top-right': 'top: 60px; right: 60px;',
+      'bottom-left': 'bottom: 60px; left: 60px;',
+      'bottom-right': 'bottom: 60px; right: 60px;'
+    };
 
-  <!-- 11 — Thanks -->
-  <section data-transition="fade" data-background-color="#0a0a0a" id="thanksSlide">
-    <div class="thanks-wrap">
-      <h2><span class="thanks-emoji">🎉</span> Thanks for listening! <span class="thanks-emoji">🎉</span></h2>
-      <p>Now go visit a museum or something</p>
-    </div>
-  </section>
-
-</div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.6.1/reveal.min.js"></script>
-<script>
-/*
- * ═══════════════════════════════════════════════════════════
- *  ZOOM CONFIG — EDIT THIS TO CHANGE ZOOM POSITIONS
- * ═══════════════════════════════════════════════════════════
- *
- *  Each entry maps to a .zoom-section slide (in order).
- *
- *  scale : zoom level (1 = full painting, 3 = 3× zoom)
- *  x     : horizontal shift % (positive = image shifts RIGHT)
- *  y     : vertical shift %   (positive = image shifts DOWN)
- *  info  : (optional) annotation box
- *    pos   : 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
- *    title : heading
- *    text  : body text
- *
- *  Flow: full → zoom POI 1 → full → zoom POI 2 → full → ...
- *  (the zoom-out-then-in is handled automatically)
- */
-var ZOOMS = [
-  { scale: 1,   x: 0,   y: 0  },
-  { scale: 1.25,   x: -10,  y: -5,  info: { pos: 'bottom-left',  title: 'Vegetation',  text: 'Trees, shrubs, grass, bushes...' }},
-  { scale: 3,   x:-30,  y:-30,   info: { pos: 'top-left',    title: 'Soldiers with the Maori', text: 'We see soldiers next to the Maori, seemingly watching or helping them.' }},
-  { scale: 3, x: -10,   y: -33,  info: { pos: 'top-left', title: 'Maori Fishermen', text: 'We see Maori fishermen carrying fishes.' }},
-  { scale: 3.5, x:-3,  y: -35,  info: { pos: 'top-left',     title: 'Soldiers disembarking on the shore', text: 'The soldiers are disembarking from the boats, at least from what it looks like. They are all wearing their traditional uniforms with blue color, distinguishing them from the Maori.' }},
-  { scale: 1.75, x: 10,   y: -21,  info: { pos: 'top-left', title: 'Two Maori soldiers', text: 'Over here, two Maori soldiers are standing in front of the whole scene, with their weapons in hand, inside of a canoe.' }},
-];
-
-var ZOOM_DURATION   = 1000; // ms — single zoom-in or zoom-out
-var ZOOM_OUT_PAUSE  = 250;  // ms — pause at full view before zooming into next POI
-
-/* ── Init Reveal ── */
-Reveal.initialize({
-  hash: true, transition: 'fade', transitionSpeed: 'slow',
-  backgroundTransition: 'fade', controls: true, progress: false,
-  center: true, width: 1200, height: 800, viewDistance: 5,
-});
-
-['smaller_painting.jpg','full_painting.jpg'].forEach(function(s){ new Image().src = s; });
-
-/* ── Title background toggle ── */
-var titleBg = document.getElementById('titleBg');
-
-/* ── Painting layer setup ── */
-var paintingEl  = document.getElementById('paintingLayer');
-var paintingImg = paintingEl.querySelector('img');
-var infoLayer   = document.getElementById('zoomInfoLayer');
-var easing      = 'cubic-bezier(0.4, 0, 0.2, 1)';
-
-// Map .zoom-section elements to their slide indices
-var allSections  = Array.from(document.querySelectorAll('.reveal .slides > section'));
-var zoomSections = Array.from(document.querySelectorAll('.zoom-section'));
-var zoomIndices  = zoomSections.map(function(s){ return allSections.indexOf(s); });
-
-// Build info-box elements from config
-var POS_STYLES = {
-  'top-left':     'top:60px;left:60px;',
-  'top-right':    'top:60px;right:60px;',
-  'bottom-left':  'bottom:60px;left:60px;',
-  'bottom-right': 'bottom:60px;right:60px;'
-};
-ZOOMS.forEach(function(z, i){
-  if (!z.info) return;
-  var d = document.createElement('div');
-  d.className = 'zoom-info';
-  d.dataset.idx = i;
-  d.style.cssText = POS_STYLES[z.info.pos] || POS_STYLES['bottom-left'];
-  d.innerHTML = '<div class="info-box"><h3>'+z.info.title+'</h3><p>'+z.info.text+'</p></div>';
-  infoLayer.appendChild(d);
-});
-
-function applyTransform(z, dur){
-  paintingImg.style.transition = dur > 0
-    ? 'transform '+dur+'ms '+easing
-    : 'none';
-  paintingImg.style.transform = 'scale('+z.scale+') translate('+z.x+'%,'+z.y+'%)';
-}
-
-function showInfo(idx){
-  infoLayer.querySelectorAll('.zoom-info').forEach(function(el){
-    el.classList.toggle('active', +el.dataset.idx === idx);
-  });
-}
-function hideInfo(){
-  infoLayer.querySelectorAll('.zoom-info').forEach(function(el){
-    el.classList.remove('active');
-  });
-}
-
-var prevZoomPos = -1;
-var animTimer   = null;
-
-Reveal.on('slidechanged', function(e){
-  var idx     = e.indexh;
-  var zoomPos = zoomIndices.indexOf(idx);
-  var isZoom  = zoomPos !== -1;
-
-  titleBg.classList.toggle('hide', idx !== 0);
-
-  // Cancel any pending animation
-  if (animTimer) { clearTimeout(animTimer); animTimer = null; }
-
-  if (!isZoom) {
-    paintingEl.classList.remove('visible');
-    hideInfo();
-    prevZoomPos = -1;
-    return;
-  }
-
-  paintingEl.classList.add('visible');
-  var cfg     = ZOOMS[zoomPos];
-  var prevCfg = prevZoomPos >= 0 ? ZOOMS[prevZoomPos] : null;
-  var comingFromZoomed = prevCfg && prevCfg.scale > 1;
-  var goingToZoomed    = cfg.scale > 1;
-
-  if (comingFromZoomed && goingToZoomed) {
-    // ── Zoom out to full, pause, zoom into new POI ──
-    hideInfo();
-    applyTransform({ scale: 1, x: 0, y: 0 }, ZOOM_DURATION);
-    animTimer = setTimeout(function(){
-      applyTransform(cfg, ZOOM_DURATION);
-      animTimer = setTimeout(function(){ showInfo(zoomPos); }, ZOOM_DURATION * 0.5);
-    }, ZOOM_DURATION + ZOOM_OUT_PAUSE);
-  } else if (comingFromZoomed && !goingToZoomed) {
-    // ── Zoom out to full ──
-    hideInfo();
-    applyTransform(cfg, ZOOM_DURATION);
-  } else if (prevZoomPos === -1) {
-    // ── First entry into zoom section: snap, no animation ──
-    applyTransform(cfg, 0);
-    if (cfg.info) setTimeout(function(){ showInfo(zoomPos); }, 400);
-  } else {
-    // ── From full to zoomed ──
-    applyTransform(cfg, ZOOM_DURATION);
-    if (cfg.info) animTimer = setTimeout(function(){ showInfo(zoomPos); }, ZOOM_DURATION * 0.5);
-  }
-
-  prevZoomPos = zoomPos;
-});
-
-/* ── Lightbox ── */
-(function(){
-  var lb = document.getElementById('lightbox');
-  var lbImg = lb.querySelector('img');
-  document.querySelectorAll('#museumImg, .lightbox-img').forEach(function(el){
-    el.addEventListener('click', function(e){
-      e.stopPropagation(); lbImg.src = this.src; lb.classList.add('active');
+    Reveal.initialize({
+      hash: true, transition: 'fade', transitionSpeed: 'slow',
+      backgroundTransition: 'fade', controls: true, progress: true,
+      center: true, width: 1280, height: 800, viewDistance: 5,
+      controlsTutorial: false
     });
-  });
-  lb.addEventListener('click', function(){ lb.classList.remove('active'); });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape') lb.classList.remove('active'); });
-})();
 
-/* ── Confetti ── */
-(function(){
-  var colors = ['#e8b84b','#e05555','#4bc8e8','#6be84b','#e84bca','#ff9f43','#fff'];
-  var box = document.getElementById('confettiBox');
-  var slide = document.getElementById('thanksSlide');
-  for(var i=0;i<120;i++){
-    var el=document.createElement('div'); el.className='confetti-piece';
-    var c=colors[Math.random()*colors.length|0];
-    var w=6+Math.random()*10;
-    var isCircle=Math.random()>0.5;
-    el.style.cssText='left:'+Math.random()*100+'%;width:'+w+'px;height:'
-      +(isCircle?w:w*(1.5+Math.random()))+'px;background:'+c
-      +';border-radius:'+(isCircle?'50%':'2px')
-      +';animation-duration:'+(2+Math.random()*3)+'s;animation-delay:'
-      +(Math.random()*2.5)+'s;--rot:'+(600+Math.random()*1200)+'deg;';
-    box.appendChild(el);
-  }
-  Reveal.on('slidechanged',function(e){ box.classList.toggle('thanks-active',e.currentSlide===slide); });
-})();
-</script>
+    ['smaller_painting.webp', 'full_painting.webp'].forEach(function (s) { new Image().src = s; });
+
+    var titleBg = document.getElementById('titleBg');
+    var paintingEl = document.getElementById('paintingLayer');
+    var paintingImg = paintingEl.querySelector('img');
+    var infoLayer = document.getElementById('zoomInfoLayer');
+    var allSections = Array.from(document.querySelectorAll('.reveal .slides > section'));
+    var zoomSections = Array.from(document.querySelectorAll('.zoom-section'));
+    var zoomIndices = zoomSections.map(function (s) { return allSections.indexOf(s); });
+
+    ZOOMS.forEach(function (z, i) {
+      if (!z.info) return;
+      var d = document.createElement('div');
+      d.className = 'zoom-info'; d.dataset.idx = i;
+      d.style.cssText = POS_STYLES[z.info.pos] || POS_STYLES['bottom-left'];
+      d.innerHTML = '<div class="info-box"><h3>' + z.info.title + '</h3><p>' + z.info.text + '</p></div>';
+      infoLayer.appendChild(d);
+    });
+
+    function applyTransform(z, dur) {
+      paintingImg.style.transition = dur > 0 ? 'transform ' + dur + 'ms ' + easing : 'none';
+      paintingImg.style.transform = 'scale(' + z.scale + ') translate(' + z.x + '%,' + z.y + '%)';
+    }
+
+    function showInfo(idx) {
+      infoLayer.querySelectorAll('.zoom-info').forEach(function (el) {
+        el.classList.toggle('active', +el.dataset.idx === idx);
+      });
+    }
+
+    function hideInfo() {
+      infoLayer.querySelectorAll('.zoom-info').forEach(function (el) { el.classList.remove('active'); });
+    }
+
+    Reveal.on('slidechanged', function (e) {
+      var idx = e.indexh;
+      var zoomPos = zoomIndices.indexOf(idx);
+      var isZoom = zoomPos !== -1;
+
+      titleBg.classList.toggle('hide', idx !== 0);
+
+      if (!isZoom) {
+        paintingEl.classList.remove('visible');
+        hideInfo();
+        return;
+      }
+
+      paintingEl.classList.add('visible');
+      var cfg = ZOOMS[zoomPos];
+      hideInfo();
+      applyTransform(cfg, ZOOM_DURATION);
+      if (cfg.info) setTimeout(function () { showInfo(zoomPos); }, ZOOM_DURATION * 0.4);
+    });
+
+    // Lightbox Logic (Only enabled for specific items that have the class)
+    (function () {
+      var lb = document.getElementById('lightbox');
+      var lbImg = lb.querySelector('img');
+      document.querySelectorAll('.lightbox-img').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.stopPropagation();
+          lbImg.src = this.src;
+          lb.classList.add('active');
+        });
+      });
+      lb.addEventListener('click', function () { lb.classList.remove('active'); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lb.classList.remove('active'); });
+    })();
+
+    // Confetti Logic
+    (function () {
+      var colors = ['#e5c07b', '#ffffff', '#a0aab5', '#61afef', '#c678dd'];
+      var box = document.getElementById('confettiBox');
+      var slide = document.getElementById('thanksSlide');
+      for (var i = 0; i < 150; i++) {
+        var el = document.createElement('div'); el.className = 'confetti-piece';
+        var c = colors[Math.random() * colors.length | 0], w = 5 + Math.random() * 8, r = Math.random() > 0.5;
+        el.style.cssText = 'left:' + Math.random() * 100 + '%; width:' + w + 'px; height:' + (r ? w : w * (1.5 + Math.random())) + 'px; background:' + c + '; border-radius:' + (r ? '50%' : '2px') + '; animation-duration:' + (2.5 + Math.random() * 4) + 's; animation-delay:' + (Math.random() * 3) + 's; --rot:' + (600 + Math.random() * 1200) + 'deg;';
+        box.appendChild(el);
+      }
+      Reveal.on('slidechanged', function (e) { box.classList.toggle('thanks-active', e.currentSlide === slide); });
+    })();
+  </script>
 </body>
+
 </html>
